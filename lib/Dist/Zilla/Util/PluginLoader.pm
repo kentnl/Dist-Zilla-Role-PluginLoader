@@ -39,7 +39,7 @@ sub _check_array {
   my ( undef, $array ) = @_;
   croak 'Attributes must be an arrayref' unless 'ARRAY' eq ref $array;
   for ( @{$array} ) {
-    croak 'Attributes ArrayRef must contain no refs' if ref
+    croak 'Attributes ArrayRef must contain no refs' if ref;
   }
   return $array;
 }
@@ -47,7 +47,7 @@ sub _check_array {
 sub _auto_attrs {
   my $nargs = ( my ( $self, $package, $name, $attrs ) = @_ );
 
-  croak "Argument <package> may not be a ref" if ref $package;
+  croak 'Argument <package> may not be a ref' if ref $package;
 
   if ( 2 == $nargs ) {
     return ( $package, $package, [] );
@@ -67,16 +67,15 @@ sub _auto_attrs {
     }
     return ( $package, $name, $self->_check_array($attrs) );
   }
-  croak "Too many arguments to load()";
+  croak 'Too many arguments to load()';
 }
 
 sub load {
   my ( $self, @args ) = @_;
   my ( $package, $name, $attrs ) = $self->_auto_attrs(@args);
 
-  if ( scalar @{$attrs} % 2 == 0 ) {
-    croak "Not an even number of attribute values, should be a key => value sequence.";
-  }
+  croak 'Not an even number of attribute values, should be a key => value sequence.' if scalar @{$attrs} % 2 == 0;
+
   my $child_section = $self->section_class->new(
     name    => $name,
     package => Dist::Zilla::Util->expand_config_package_name($package),
