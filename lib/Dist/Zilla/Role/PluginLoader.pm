@@ -77,7 +77,7 @@ C<Dist::Zilla::App::Command::bakeini>
 |Dist::Zilla::App::Command::bakeini
 >>
 
-=item * You are loading a single, or handful of modules, all of which are I<BLATENTLY> obvious I<DIRECTLY> in C<dist.ini>,
+=item * You are loading a single, or handful of modules, all of which are I<BLATENLY> obvious I<DIRECTLY> in C<dist.ini>,
 except with some special loading semantics.
 
 =back
