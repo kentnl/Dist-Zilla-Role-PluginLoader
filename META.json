@@ -84,7 +84,7 @@
          "requires" : {
             "Dist::Zilla::Role::PrereqSource" : "0",
             "Dist::Zilla::Util::ConfigDumper" : "0",
-            "Dist::Zilla::Util::PluginLoader" : "0",
+            "Moose" : "0",
             "Moose::Role" : "0",
             "perl" : "5.008",
             "strict" : "0",
@@ -109,14 +109,15 @@
       "Dist::Zilla::Role::PluginLoader" : {
          "file" : "lib/Dist/Zilla/Role/PluginLoader.pm",
          "version" : "0.001000"
+      },
+      "Dist::Zilla::Util::PluginLoader" : {
+         "file" : "lib/Dist/Zilla/Util/PluginLoader.pm",
+         "version" : "0.001000"
       }
    },
    "release_status" : "stable",
    "version" : "0.001000",
    "x_BuiltWith" : {
-      "failures" : {
-         "Dist::Zilla::Util::PluginLoader" : "module was not found in INC"
-      },
       "modules" : {
          "CPAN::Meta" : "2.142060",
          "Dist::Zilla::Plugin::Author::KENTNL::RecommendFixes" : "0.002003",
@@ -169,6 +170,7 @@
          "Dist::Zilla::Util::ConfigDumper" : "0.003000",
          "ExtUtils::MakeMaker" : "6.98",
          "File::Spec" : "3.49",
+         "Moose" : "2.1211",
          "Moose::Role" : "2.1211",
          "Pod::Coverage::TrustPod" : "0.100003",
          "Test::CPAN::Changes" : "0.30",
@@ -360,7 +362,8 @@
             "config" : {
                "Dist::Zilla::Plugin::Test::Compile::PerFile" : {
                   "file" : [
-                     "lib/Dist/Zilla/Role/PluginLoader.pm"
+                     "lib/Dist/Zilla/Role/PluginLoader.pm",
+                     "lib/Dist/Zilla/Util/PluginLoader.pm"
                   ],
                   "path_translator" : "base64_filter",
                   "prefix" : "t/00-compile",
