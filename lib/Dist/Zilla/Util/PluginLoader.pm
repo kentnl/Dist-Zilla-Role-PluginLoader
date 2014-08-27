@@ -7,7 +7,7 @@ package Dist::Zilla::Util::PluginLoader;
 
 our $VERSION = '0.001000';
 
-# ABSTRACT: Inflate a Legal DZil Plugin from basic parts
+# ABSTRACT: Inflate a Legal Dist::Zilla Plugin from basic parts
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
@@ -109,7 +109,7 @@ __END__
 
 =head1 NAME
 
-Dist::Zilla::Util::PluginLoader - Inflate a Legal DZil Plugin from basic parts
+Dist::Zilla::Util::PluginLoader - Inflate a Legal Dist::Zilla Plugin from basic parts
 
 =head1 VERSION
 
