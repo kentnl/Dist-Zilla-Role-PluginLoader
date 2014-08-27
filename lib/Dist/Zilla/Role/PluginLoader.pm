@@ -74,7 +74,7 @@ C<PluginLoader::Configurable>
 
 =item * You B<I<EXPRESSLY>> wish to hide the loaded modules from things like L<< C<Dist::Zilla::App::Command::bakeini>|Dist::Zilla::App::Command::bakeini >>
 
-=item * You are loading a single, or handful of modules, all of which are I<BLATANLY> obvious I<DIRECTLY> in C<dist.ini>, except with some special loading semantis.
+=item * You are loading a single, or handful of modules, all of which are I<BLATENTLY> obvious I<DIRECTLY> in C<dist.ini>, except with some special loading semantis.
 
 =back
 
