@@ -195,6 +195,10 @@ around plugin_from_config => sub {
 
 
 
+my $re_phases = qr/configure|build|test|runtime|develop/msx;
+my $re_relation = qr/requires|recommends|suggests|conflicts/msx;
+my $re_prereq   = qr/\A($re_phases)[.]($re_relation)\z/msx;
+
 sub register_prereqs {
   my ($self) = @_;
   my $prereqs = $self->zilla->prereqs;
