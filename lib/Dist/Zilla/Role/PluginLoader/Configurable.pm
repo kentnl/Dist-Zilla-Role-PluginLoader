@@ -10,6 +10,7 @@ package Dist::Zilla::Role::PluginLoader::Configurable;
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
 use Moose::Role qw( has around with );
+use Dist::Zilla::Util;
 use Dist::Zilla::Util::ConfigDumper qw( config_dumper );
 with 'Dist::Zilla::Role::PrereqSource';
 with 'Dist::Zilla::Role::PluginLoader';
@@ -163,7 +164,8 @@ sub register_prereqs {
     }
   }
   for my $target (@targets) {
-    $target->add_string_requirement( $self->dz_plugin_package, $self->dz_plugin_minversion );
+    $target->add_string_requirement( Dist::Zilla::Util->expand_config_package_name( $self->dz_plugin ),
+      $self->dz_plugin_minversion );
   }
   return;
 }
