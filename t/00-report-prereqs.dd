@@ -67,6 +67,7 @@ do { my $x = {
                     },
        'runtime' => {
                       'requires' => {
+                                      'Carp' => '0',
                                       'Dist::Zilla::Role::PrereqSource' => '0',
                                       'Dist::Zilla::Util::ConfigDumper' => '0',
                                       'Moose' => '0',

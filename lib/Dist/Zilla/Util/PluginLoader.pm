@@ -9,6 +9,7 @@ package Dist::Zilla::Util::PluginLoader;
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
+use Carp qw( croak );
 use Moose qw( has );
 
 has sequence      => ( is => ro =>, required   => 1 );
