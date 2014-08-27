@@ -59,7 +59,10 @@ version 0.001000
 
 =head2 STOP
 
-You probably don't want to use this module. You either want a C<@PluginBundle>, or L<< C<PluginLoader::Configurable>|Dist::Zilla::Role::PluginLoader::Configurable >>
+You probably don't want to use this module. You either want a C<@PluginBundle>, or L<<
+C<PluginLoader::Configurable>
+|Dist::Zilla::Role::PluginLoader::Configurable
+>>
 
 =head2 WHEN YOU WANT THIS MODULE
 
