@@ -157,7 +157,7 @@ sub _split_ini_token {
 }
 
 sub load_dz_plugin {
-  my ( $self, $parent_secton ) = @_;
+  my ( $self, $parent_section ) = @_;
 
   # Here is where we construct the conditional plugin
   my $assembler     = $parent_section->sequence->assembler;
