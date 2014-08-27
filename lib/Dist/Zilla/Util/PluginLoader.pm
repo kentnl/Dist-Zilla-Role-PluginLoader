@@ -76,16 +76,16 @@ sub load {
     croak "Not an even number of attribute values, should be a key => value sequence.";
   }
   my $child_section = $self->section_class->new(
-    name     => $name,
-    package  => Dist::Zilla::Util->expand_config_package_name($package),
-    sequence => $self->sequence,
+    name    => $name,
+    package => Dist::Zilla::Util->expand_config_package_name($package),
   );
   my @xattrs = @{$attrs};
   while (@xattrs) {
     my ( $key, $value ) = splice @xattrs, 0, 2, ();
     $child_section->add_value( $key, $value );
   }
-  $child_section->finalize;
+  $self->sequence->add_section($child_section);
+  $child_section->finalize unless $child_section->is_finalized;
   return;
 }
 
