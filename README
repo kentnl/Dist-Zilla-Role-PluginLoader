@@ -31,7 +31,7 @@ WARNINGS
         "Dist::Zilla::App::Command::bakeini"
 
     *   You are loading a single, or handful of modules, all of which are
-        *BLATENLY* obvious *DIRECTLY* in "dist.ini", except with some
+        *BLATANTLY* obvious *DIRECTLY* in "dist.ini", except with some
         special loading semantics.
 
   ADVICE
