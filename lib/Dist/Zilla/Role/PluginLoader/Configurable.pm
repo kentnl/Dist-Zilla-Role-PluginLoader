@@ -13,7 +13,7 @@ use Moose::Role qw( has around with );
 use Dist::Zilla::Util;
 use Dist::Zilla::Util::ConfigDumper qw( config_dumper );
 with 'Dist::Zilla::Role::PrereqSource';
-with 'Dist::Zilla::Role::PluginLoader';
+with 'Dist::Zilla::Role::PluginLoader', { exclude => 'logger' };
 
 
 
