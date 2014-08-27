@@ -161,13 +161,12 @@ sub _split_ini_token {
 
 sub load_dz_plugin {
   my ( $self, $parent_section ) = @_;
-  $parent_section->can('sequence') or die "Not a Section!";
   # Here is where we construct the conditional plugin
   my $assembler     = $parent_section->sequence->assembler;
   my $child_section = $assembler->section_class->new(
     name     => $self->dz_plugin_name,
     package  => $self->dz_plugin_package,
-    sequence => $self->sequence,
+    sequence => $parent_section->sequence,
   );
 
   # Here is us, adding the arguments to that plugin
