@@ -185,7 +185,7 @@ sub plugin_loader {
 around plugin_from_config => sub {
   my ( $orig, $plugin_class, $name, $arg, $own_section ) = @_;
   my $own_object = $plugin_class->$orig( $name, $arg, $own_section );
-  $own_object->pluginloader($own_section);
+  $own_object->plugin_loader($own_section);
   return $own_object;
 };
 
