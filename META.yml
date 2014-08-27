@@ -19,12 +19,17 @@ provides:
   Dist::Zilla::Role::PluginLoader:
     file: lib/Dist/Zilla/Role/PluginLoader.pm
     version: '0.001000'
+  Dist::Zilla::Role::PluginLoader::Configurable:
+    file: lib/Dist/Zilla/Role/PluginLoader/Configurable.pm
+    version: '0.001000'
   Dist::Zilla::Util::PluginLoader:
     file: lib/Dist/Zilla/Util/PluginLoader.pm
     version: '0.001000'
 requires:
   Carp: '0'
+  Dist::Zilla::Role::PrereqSource: '0'
   Dist::Zilla::Util: '0'
+  Dist::Zilla::Util::ConfigDumper: '0'
   Moose: '0'
   Moose::Role: '0'
   perl: '5.008'
@@ -82,7 +87,9 @@ x_BuiltWith:
     Dist::Zilla::Plugin::UploadToCPAN: '5.020'
     Dist::Zilla::PluginBundle::Author::KENTNL: '2.020000'
     Dist::Zilla::PluginBundle::Author::KENTNL::Lite: '2.001000'
+    Dist::Zilla::Role::PrereqSource: '5.020'
     Dist::Zilla::Util: '5.020'
+    Dist::Zilla::Util::ConfigDumper: '0.003000'
     ExtUtils::MakeMaker: '6.98'
     File::Spec: '3.49'
     Moose: '2.1211'
@@ -237,6 +244,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Test::Compile::PerFile:
           file:
             - lib/Dist/Zilla/Role/PluginLoader.pm
+            - lib/Dist/Zilla/Role/PluginLoader/Configurable.pm
             - lib/Dist/Zilla/Util/PluginLoader.pm
           path_translator: base64_filter
           prefix: t/00-compile
