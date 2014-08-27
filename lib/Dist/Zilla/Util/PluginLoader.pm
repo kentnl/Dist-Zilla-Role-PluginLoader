@@ -38,7 +38,7 @@ sub _split_ini_token {
 sub _check_array {
   my ( undef, $array ) = @_;
   croak "Attributes must be an arrayref" unless "ARRAY" eq ref $array;
-  if ( grep { ref $_ } @{$array} ) {
+  if ( scalar grep { ref } @{$array} ) {
     croak "Attributes ArrayRef must contain no refs";
   }
   return $array;

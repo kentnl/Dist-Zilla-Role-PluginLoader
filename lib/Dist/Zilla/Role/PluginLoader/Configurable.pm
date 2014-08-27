@@ -1,4 +1,4 @@
-use 5.008;    # utf8
+use 5.010;    # _Pulp__5010_qr_m_propagate_properly
 use strict;
 use warnings;
 use utf8;
@@ -14,7 +14,8 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 use Moose::Role qw( has around with );
 use Dist::Zilla::Util;
 use Dist::Zilla::Util::ConfigDumper qw( config_dumper );
-with 'Dist::Zilla::Role::PrereqSource','Dist::Zilla::Role::PluginLoader'; 
+with 'Dist::Zilla::Role::PrereqSource', 'Dist::Zilla::Role::PluginLoader';
+
 
 
 
@@ -94,10 +95,10 @@ sub _build_dz_plugin_minversion { return 0 }
 
 
 has dz_plugin_arguments => ( is => ro =>, lazy => 1, lazy_build => 1 );
-sub _build_dz_plugin_arguments { [] }
+sub _build_dz_plugin_arguments { return [] }
 
 has prereq_to => ( is => ro =>, lazy => 1, lazy_build => 1 );
-sub _build_prereq_to { ['develop.requires'] }
+sub _build_prereq_to { return ['develop.requires'] }
 
 
 
