@@ -83,12 +83,6 @@ ATTRIBUTES
       dz_plugin_argument = exclude_file = bad
       dz_plugin_argument = exclude_file = bad2
 
-  "dz_plugin_package"
-    This is an implementation detail which returns the expanded name of
-    "dz_plugin"
-
-    You could probably find some evil use for this, but I doubt it.
-
 AUTHOR
     Kent Fredric <kentfredric@gmail.com>
 

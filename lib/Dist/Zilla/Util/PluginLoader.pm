@@ -11,6 +11,7 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
 use Carp qw( croak );
 use Moose qw( has );
+use Dist::Zilla::Util;
 
 has sequence      => ( is => ro =>, required   => 1 );
 has assembler     => ( is => ro =>, lazy_build => 1 );
@@ -69,28 +70,29 @@ sub _auto_attrs {
 
 sub load {
   my ( $self, @args ) = @_;
-  my ( $package, $name, $attrs ) = $self->_auto_attrs( @args );
+  my ( $package, $name, $attrs ) = $self->_auto_attrs(@args);
 
   if ( scalar @{$attrs} % 2 & 1 ) {
     croak "Not an even number of attribute values, should be a key => value sequence.";
   }
   my $child_section = $self->section_class->new(
-    name     => $name, 
-    package  => $package,
+    name     => $name,
+    package  => Dist::Zilla::Util->expand_config_package_name($package),
     sequence => $self->sequence,
   );
-  my @xattrs  = @{$attrs};
-  while( @xattrs ) {
+  my @xattrs = @{$attrs};
+  while (@xattrs) {
     my ( $key, $value ) = splice @xattrs, 0, 2, ();
     $child_section->add_value( $key, $value );
   }
   $child_section->finalize;
   return;
 }
+
 sub load_ini {
   my ( $self, @args ) = @_;
-  my ( $package, $name, $attrs ) = $self->_auto_attrs( @args );
-  return $self->load( $package, $name, [ map { $self->_split_ini_token( $_ ) } @{ $attrs } ]);
+  my ( $package, $name, $attrs ) = $self->_auto_attrs(@args);
+  return $self->load( $package, $name, [ map { $self->_split_ini_token($_) } @{$attrs} ] );
 }
 
 no Moose;

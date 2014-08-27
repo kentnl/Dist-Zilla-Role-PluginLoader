@@ -25,6 +25,7 @@ provides:
 requires:
   Carp: '0'
   Dist::Zilla::Role::PrereqSource: '0'
+  Dist::Zilla::Util: '0'
   Dist::Zilla::Util::ConfigDumper: '0'
   Moose: '0'
   Moose::Role: '0'
@@ -84,6 +85,7 @@ x_BuiltWith:
     Dist::Zilla::PluginBundle::Author::KENTNL: '2.020000'
     Dist::Zilla::PluginBundle::Author::KENTNL::Lite: '2.001000'
     Dist::Zilla::Role::PrereqSource: '5.020'
+    Dist::Zilla::Util: '5.020'
     Dist::Zilla::Util::ConfigDumper: '0.003000'
     ExtUtils::MakeMaker: '6.98'
     File::Spec: '3.49'

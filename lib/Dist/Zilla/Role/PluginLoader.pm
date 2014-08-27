@@ -98,23 +98,8 @@ sub _build_dz_plugin_minversion { return 0 }
 has dz_plugin_arguments => ( is => ro =>, lazy => 1, lazy_build => 1 );
 sub _build_dz_plugin_arguments { [] }
 
-
-
-
-
-
-
-
-
-has dz_plugin_package => ( is => ro =>, lazy => 1, lazy_build => 1 );
-
-sub _build_dz_plugin_package {
-  my ($self) = @_;
-  return Dist::Zilla::Util->expand_config_package_name( $self->dz_plugin );
-}
-
 has prereq_to => ( is => ro =>, lazy => 1, lazy_build => 1 );
-sub _build_prereq_to { [ 'develop.requires'] }
+sub _build_prereq_to { ['develop.requires'] }
 
 around 'dump_config' => config_dumper( __PACKAGE__,
   qw( dz_plugin dz_plugin_name dz_plugin_package dz_plugin_minversion dz_plugin_arguments prereq_to ) );
@@ -154,23 +139,17 @@ sub mvp_multivalue_args {
   return qw( dz_plugin_arguments prereq_to );
 }
 
-sub load_dz_plugin {
-  my ( $self, $parent_section ) = @_;
-  my $loader = Dist::Zilla::Util::PluginLoader->new( sequence => $parent_section->sequence );
-  $loader->load_ini( $self->dz_plugin_package, $self->dz_plugin_name, $self->dz_plugin_arguments );
-  return;
-}
-
-sub plugin_loader {
-  my ( $self, $parent_section ) = @_;
-  $self->load_dz_plugin($parent_section);
+sub load_plugins {
+  my ( $self, $loader ) = @_;
+  $loader->load_ini( $self->dz_plugin, $self->dz_plugin_name, $self->dz_plugin_arguments );
   return;
 }
 
 around plugin_from_config => sub {
   my ( $orig, $plugin_class, $name, $arg, $own_section ) = @_;
   my $own_object = $plugin_class->$orig( $name, $arg, $own_section );
-  $own_object->plugin_loader($own_section);
+  my $loader = Dist::Zilla::Util::PluginLoader->new( sequence => $own_section->sequence );
+  $own_object->load_plugins($loader);
   return $own_object;
 };
 
@@ -180,7 +159,8 @@ around plugin_from_config => sub {
 
 
 
-my $re_phases = qr/configure|build|test|runtime|develop/msx;
+
+my $re_phases   = qr/configure|build|test|runtime|develop/msx;
 my $re_relation = qr/requires|recommends|suggests|conflicts/msx;
 my $re_prereq   = qr/\A($re_phases)[.]($re_relation)\z/msx;
 
@@ -309,12 +289,6 @@ Or in crazy long form
   dz_plugin_argument = include_dotfiles = 1
   dz_plugin_argument = exclude_file = bad
   dz_plugin_argument = exclude_file = bad2
-
-=head2 C<dz_plugin_package>
-
-This is an implementation detail which returns the expanded name of C<dz_plugin>
-
-You could probably find some evil use for this, but I doubt it.
 
 =head1 AUTHOR
 
