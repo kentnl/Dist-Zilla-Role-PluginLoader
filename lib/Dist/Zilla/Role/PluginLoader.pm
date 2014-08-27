@@ -112,6 +112,9 @@ sub _build_dz_plugin_package {
   return Dist::Zilla::Util->expand_config_package_name( $self->dz_plugin );
 }
 
+has prereq_to => ( is => ro =>, lazy => 1, lazy_build => 1 );
+sub _build_prereq_to { [ 'develop.requires'] }
+
 around 'dump_config' => config_dumper( __PACKAGE__,
   qw( dz_plugin dz_plugin_name dz_plugin_package dz_plugin_minversion dz_plugin_arguments prereq_to ) );
 
