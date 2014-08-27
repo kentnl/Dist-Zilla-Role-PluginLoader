@@ -90,7 +90,7 @@ sub load {
 sub load_ini {
   my ( $self, @args ) = @_;
   my ( $package, $name, $attrs ) = $self->_auto_attrs( @args );
-  return $self->load( $package, $name, [ map { $self->_split_ini( $_ ) } @{ $attrs } ]);
+  return $self->load( $package, $name, [ map { $self->_split_ini_token( $_ ) } @{ $attrs } ]);
 }
 
 no Moose;
