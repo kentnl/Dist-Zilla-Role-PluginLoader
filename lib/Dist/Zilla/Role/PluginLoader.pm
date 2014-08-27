@@ -13,6 +13,7 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
 use Moose::Role qw( has around with requires );
 use Dist::Zilla::Util::ConfigDumper qw( config_dumper );
+use Dist::Zilla::Util::PluginLoader;
 
 with 'Dist::Zilla::Role::PrereqSource';
 
@@ -153,28 +154,10 @@ sub mvp_multivalue_args {
   return qw( dz_plugin_arguments prereq_to );
 }
 
-sub _split_ini_token {
-  my ( undef, $token ) = @_;
-  my ( $key,  $value ) = $token =~ /\A\s*([^=]+?)\s*=\s*(.+?)\s*\z/msx;
-  return ( $key, $value );
-}
-
 sub load_dz_plugin {
   my ( $self, $parent_section ) = @_;
-  # Here is where we construct the conditional plugin
-  my $assembler     = $parent_section->sequence->assembler;
-  my $child_section = $assembler->section_class->new(
-    name     => $self->dz_plugin_name,
-    package  => $self->dz_plugin_package,
-    sequence => $parent_section->sequence,
-  );
-
-  # Here is us, adding the arguments to that plugin
-  for my $argument ( @{ $self->dz_plugin_arguments } ) {
-    $child_section->add_value( $self->_split_ini_token($argument) );
-  }
-  ## And this is where the assembler injects into $zilla->plugins!
-  $child_section->finalize();
+  my $loader = Dist::Zilla::Util::PluginLoader->new( sequence => $parent_section->sequence );
+  $loader->load_ini( $self->dz_plugin_package, $self->dz_plugin_name, $self->dz_plugin_arguments );
   return;
 }
 

@@ -84,6 +84,7 @@
          "requires" : {
             "Dist::Zilla::Role::PrereqSource" : "0",
             "Dist::Zilla::Util::ConfigDumper" : "0",
+            "Dist::Zilla::Util::PluginLoader" : "0",
             "Moose::Role" : "0",
             "perl" : "5.008",
             "strict" : "0",
@@ -113,6 +114,9 @@
    "release_status" : "stable",
    "version" : "0.001000",
    "x_BuiltWith" : {
+      "failures" : {
+         "Dist::Zilla::Util::PluginLoader" : "module was not found in INC"
+      },
       "modules" : {
          "CPAN::Meta" : "2.142060",
          "Dist::Zilla::Plugin::Author::KENTNL::RecommendFixes" : "0.002003",
