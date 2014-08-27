@@ -5,6 +5,8 @@ use utf8;
 
 package Dist::Zilla::Util::PluginLoader;
 
+our $VERSION = '0.001000';
+
 # ABSTRACT: Inflate a Legal DZil Plugin from basic parts
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
@@ -72,7 +74,7 @@ sub load {
   my ( $self, @args ) = @_;
   my ( $package, $name, $attrs ) = $self->_auto_attrs(@args);
 
-  if ( scalar @{$attrs} % 2 & 1 ) {
+  if ( scalar @{$attrs} % 2 == 0 ) {
     croak "Not an even number of attribute values, should be a key => value sequence.";
   }
   my $child_section = $self->section_class->new(
