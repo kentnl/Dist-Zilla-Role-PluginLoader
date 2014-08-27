@@ -32,7 +32,7 @@ WARNINGS
 
     *   You are loading a single, or handful of modules, all of which are
         *BLATENTLY* obvious *DIRECTLY* in "dist.ini", except with some
-        special loading semantis.
+        special loading semantics.
 
   ADVICE
     *   Do make consuming plugins have to declare the loaded plugin somehow

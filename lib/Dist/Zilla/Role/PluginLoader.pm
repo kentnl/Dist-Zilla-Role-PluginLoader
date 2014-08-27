@@ -72,9 +72,13 @@ C<PluginLoader::Configurable>
 
 =item * You want something harder to understand for people who use your plugin.
 
-=item * You B<I<EXPRESSLY>> wish to hide the loaded modules from things like L<< C<Dist::Zilla::App::Command::bakeini>|Dist::Zilla::App::Command::bakeini >>
+=item * You B<I<EXPRESSLY>> wish to hide the loaded modules from things like L<<
+C<Dist::Zilla::App::Command::bakeini>
+|Dist::Zilla::App::Command::bakeini
+>>
 
-=item * You are loading a single, or handful of modules, all of which are I<BLATENTLY> obvious I<DIRECTLY> in C<dist.ini>, except with some special loading semantis.
+=item * You are loading a single, or handful of modules, all of which are I<BLATENTLY> obvious I<DIRECTLY> in C<dist.ini>,
+except with some special loading semantics.
 
 =back
 
@@ -88,9 +92,13 @@ C<PluginLoader::Configurable>
 
 =item * If at all possible, load at most, one plugin.
 
-=item * If at all possible, and you are loading only one plugin, use L<< C<PluginLoader::Configurable>|Dist::Zilla::Role::PluginLoader::Configurable >>
+=item * If at all possible, and you are loading only one plugin, use L<<
+C<PluginLoader::Configurable>
+|Dist::Zilla::Role::PluginLoader::Configurable
+>>
 
-=item * If you have read this far, and you still are considering using this Role, please contact me, C<kentnl> on C<#distzilla@irc.perl.org>, and let me convince you not to.
+=item * If you have read this far, and you still are considering using this Role, please contact me, C<kentnl> on
+C<#distzilla@irc.perl.org>, and let me convince you not to.
 
 =back
 
