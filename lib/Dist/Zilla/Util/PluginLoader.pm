@@ -75,8 +75,8 @@ sub load {
     croak "Not an even number of attribute values, should be a key => value sequence.";
   }
   my $child_section = $self->section_class->new(
-    name     => $package, 
-    package  => $name,
+    name     => $name, 
+    package  => $package,
     sequence => $self->sequence,
   );
   my @xattrs  = @{$attrs};
