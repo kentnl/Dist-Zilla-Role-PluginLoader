@@ -1,87 +1,8 @@
 NAME
-    Dist::Zilla::Role::PluginLoader - A Plugin that loads another
+    Dist::Zilla::Role::PluginLoader - A Plugin that can load others.
 
 VERSION
     version 0.001000
-
-METHODS
-  "mvp_aliases"
-    *   "dz_plugin_arguments=" can be written as ">=" or
-        "dz_plugin_argument="
-
-  "mvp_multivalue_args"
-    All of the following support multiple declaration:
-
-    *   "dz_plugin_arguments"
-
-    *   "prereq_to"
-
-  "register_prereqs"
-    By default, registers "dz_plugin_package" version
-    "dz_plugin_minimumversion" as "develop.requires" ( as per "prereq_to" ).
-
-ATTRIBUTES
-  "dz_plugin"
-    REQUIRED
-
-    The "plugin" identifier.
-
-    For instance, "[GatherDir / Foo]" and "[GatherDir]" approximation would
-    both set this field to
-
-      dz_plugin => 'GatherDir'
-
-  "dz_plugin_name"
-    The "Name" for the "plugin".
-
-    For instance, "[GatherDir / Foo]" would set this value as
-
-      dz_plugin_name => "Foo"
-
-    and "[GatherDir]" approximation would both set this field to
-
-      dz_plugin_name => "Foo"
-
-    In "Dist::Zilla", "[GatherDir]" is equivalent to "[GatherDir /
-    GatherDir]".
-
-    Likewise, if you do not specify "dz_plugin_name", the value of
-    "dz_plugin" will be used.
-
-  "dz_plugin_minversion"
-    The minimum version of "dz_plugin" to use.
-
-    At present, this ONLY affects "prereq" generation.
-
-  "dz_plugin_arguments"
-    A "mvp_multivalue_arg" attribute that creates an array of arguments to
-    pass on to the created plugin.
-
-    For convenience, this attribute has an alias of '>' ( mnemonic "Forward"
-    ), so that the following example:
-
-      [GatherDir]
-      include_dotfiles = 1
-      exclude_file = bad
-      exclude_file = bad2
-
-    Would be written
-
-      [if]
-      dz_plugin = GatherDir
-      ?= $ENV{dogatherdir}
-      >= include_dotfiles = 1
-      >= exclude_file = bad
-      >= exclude_file = bad2
-
-    Or in crazy long form
-
-      [if]
-      dz_plugin = GatherDir
-      condtion = $ENV{dogatherdir}
-      dz_plugin_argument = include_dotfiles = 1
-      dz_plugin_argument = exclude_file = bad
-      dz_plugin_argument = exclude_file = bad2
 
 AUTHOR
     Kent Fredric <kentfredric@gmail.com>

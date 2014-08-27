@@ -10,7 +10,7 @@ use ExtUtils::MakeMaker ;
 
 
 my %WriteMakefileArgs = (
-  "ABSTRACT" => "A Plugin that loads another",
+  "ABSTRACT" => "A Plugin that can load others.",
   "AUTHOR" => "Kent Fredric <kentfredric\@gmail.com>",
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => 0
@@ -21,9 +21,7 @@ my %WriteMakefileArgs = (
   "NAME" => "Dist::Zilla::Role::PluginLoader",
   "PREREQ_PM" => {
     "Carp" => 0,
-    "Dist::Zilla::Role::PrereqSource" => 0,
     "Dist::Zilla::Util" => 0,
-    "Dist::Zilla::Util::ConfigDumper" => 0,
     "Moose" => 0,
     "Moose::Role" => 0,
     "strict" => 0,
@@ -44,9 +42,7 @@ my %WriteMakefileArgs = (
 
 my %FallbackPrereqs = (
   "Carp" => 0,
-  "Dist::Zilla::Role::PrereqSource" => 0,
   "Dist::Zilla::Util" => 0,
-  "Dist::Zilla::Util::ConfigDumper" => 0,
   "ExtUtils::MakeMaker" => 0,
   "File::Spec" => 0,
   "Moose" => 0,

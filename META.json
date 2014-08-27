@@ -1,5 +1,5 @@
 {
-   "abstract" : "A Plugin that loads another",
+   "abstract" : "A Plugin that can load others.",
    "author" : [
       "Kent Fredric <kentfredric@gmail.com>"
    ],
@@ -83,9 +83,7 @@
       "runtime" : {
          "requires" : {
             "Carp" : "0",
-            "Dist::Zilla::Role::PrereqSource" : "0",
             "Dist::Zilla::Util" : "0",
-            "Dist::Zilla::Util::ConfigDumper" : "0",
             "Moose" : "0",
             "Moose::Role" : "0",
             "perl" : "5.008",
@@ -169,9 +167,7 @@
          "Dist::Zilla::Plugin::UploadToCPAN" : "5.020",
          "Dist::Zilla::PluginBundle::Author::KENTNL" : "2.020000",
          "Dist::Zilla::PluginBundle::Author::KENTNL::Lite" : "2.001000",
-         "Dist::Zilla::Role::PrereqSource" : "5.020",
          "Dist::Zilla::Util" : "5.020",
-         "Dist::Zilla::Util::ConfigDumper" : "0.003000",
          "ExtUtils::MakeMaker" : "6.98",
          "File::Spec" : "3.49",
          "Moose" : "2.1211",
