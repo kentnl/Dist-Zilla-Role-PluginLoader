@@ -83,6 +83,7 @@
       "runtime" : {
          "requires" : {
             "Carp" : "0",
+            "Dist::Zilla::Role::Plugin" : "0",
             "Dist::Zilla::Role::PrereqSource" : "0",
             "Dist::Zilla::Util" : "0",
             "Dist::Zilla::Util::ConfigDumper" : "0",
@@ -173,6 +174,7 @@
          "Dist::Zilla::Plugin::UploadToCPAN" : "5.020",
          "Dist::Zilla::PluginBundle::Author::KENTNL" : "2.020000",
          "Dist::Zilla::PluginBundle::Author::KENTNL::Lite" : "2.001000",
+         "Dist::Zilla::Role::Plugin" : "5.020",
          "Dist::Zilla::Role::PrereqSource" : "5.020",
          "Dist::Zilla::Util" : "5.020",
          "Dist::Zilla::Util::ConfigDumper" : "0.003000",

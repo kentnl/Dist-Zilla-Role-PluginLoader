@@ -21,6 +21,7 @@ my %WriteMakefileArgs = (
   "NAME" => "Dist::Zilla::Role::PluginLoader",
   "PREREQ_PM" => {
     "Carp" => 0,
+    "Dist::Zilla::Role::Plugin" => 0,
     "Dist::Zilla::Role::PrereqSource" => 0,
     "Dist::Zilla::Util" => 0,
     "Dist::Zilla::Util::ConfigDumper" => 0,
@@ -44,6 +45,7 @@ my %WriteMakefileArgs = (
 
 my %FallbackPrereqs = (
   "Carp" => 0,
+  "Dist::Zilla::Role::Plugin" => 0,
   "Dist::Zilla::Role::PrereqSource" => 0,
   "Dist::Zilla::Util" => 0,
   "Dist::Zilla::Util::ConfigDumper" => 0,

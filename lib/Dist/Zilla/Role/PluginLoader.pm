@@ -14,6 +14,8 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 use Moose::Role qw( has around with requires );
 use Dist::Zilla::Util::PluginLoader;
 
+with 'Dist::Zilla::Role::Plugin';
+
 requires 'load_plugins';
 
 around plugin_from_config => sub {
@@ -41,6 +43,55 @@ Dist::Zilla::Role::PluginLoader - A Plugin that can load others.
 =head1 VERSION
 
 version 0.001000
+
+=head1 SYNOPSIS
+
+  use Moose;
+  with 'Dist::Zilla::Role::PluginLoader';
+
+  sub load_plugins {
+    my ( $self, $loader ) = @_;
+    # Load raw config
+    $loader->load    ( 'GatherDir', 'GatherDir-for-FooPlugin',  [ include_dotfiles => 1, key => value,   ... ]);
+    # Load using ini style input
+    $loader->load_ini( 'GatherDir', 'GatherDir2-for-FooPlugin', [ 'include_dotfiles = 1', 'key = value', ... ]);
+  }
+
+=head1 WARNINGS
+
+=head2 STOP
+
+You probably don't want to use this module. You either want a C<@PluginBundle>, or L<< C<PluginLoader::Configurable>|Dist::Zilla::Role::PluginLoader::Configurable >>
+
+=head2 WHEN YOU WANT THIS MODULE
+
+=over 4
+
+=item * You don't want a plugin bundle
+
+=item * You want something harder to understand for people who use your plugin.
+
+=item * You B<I<EXPRESSLY>> wish to hide the loaded modules from things like L<< C<Dist::Zilla::App::Command::bakeini>|Dist::Zilla::App::Command::bakeini >>
+
+=item * You are loading a single, or handful of modules, all of which are I<BLATANLY> obvious I<DIRECTLY> in C<dist.ini>, except with some special loading semantis.
+
+=back
+
+=head2 ADVICE
+
+=over 4
+
+=item * Do make consuming plugins have to declare the loaded plugin somehow
+
+=item * Do make consuming plugins able to directly configure the loaded plugin somehow
+
+=item * If at all possible, load at most, one plugin.
+
+=item * If at all possible, and you are loading only one plugin, use L<< C<PluginLoader::Configurable>|Dist::Zilla::Role::PluginLoader::Configurable >>
+
+=item * If you have read this far, and you still are considering using this Role, please contact me, C<kentnl> on C<#distzilla@irc.perl.org>, and let me convince you not to.
+
+=back
 
 =head1 AUTHOR
 
