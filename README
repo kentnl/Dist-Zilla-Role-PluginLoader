@@ -16,6 +16,10 @@ METHODS
 
     *   "prereq_to"
 
+  "register_prereqs"
+    By default, registers "dz_plugin_package" version
+    "dz_plugin_minimumversion" as "develop.requires" ( as per "prereq_to" ).
+
 ATTRIBUTES
   "dz_plugin"
     REQUIRED

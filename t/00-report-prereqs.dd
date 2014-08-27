@@ -69,7 +69,6 @@ do { my $x = {
                       'requires' => {
                                       'Dist::Zilla::Role::PrereqSource' => '0',
                                       'Dist::Zilla::Util::ConfigDumper' => '0',
-                                      'Moose' => '0',
                                       'Moose::Role' => '0',
                                       'perl' => '5.008',
                                       'strict' => '0',

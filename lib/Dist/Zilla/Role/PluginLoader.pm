@@ -11,7 +11,7 @@ our $VERSION = '0.001000';
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
-use Moose qw( has around with requires );
+use Moose::Role qw( has around with requires );
 use Dist::Zilla::Util::ConfigDumper qw( config_dumper );
 
 with 'Dist::Zilla::Role::PrereqSource';
@@ -49,7 +49,7 @@ has dz_plugin => ( is => ro =>, required => 1 );
 
 
 has dz_plugin_name => ( is => ro =>, lazy => 1, lazy_build => 1 );
-sub _build_dz_plugin_name { my ($self) = @_; return $self->dz_plugin; };
+sub _build_dz_plugin_name { my ($self) = @_; return $self->dz_plugin; }
 
 
 
@@ -60,8 +60,7 @@ sub _build_dz_plugin_name { my ($self) = @_; return $self->dz_plugin; };
 
 
 has dz_plugin_minversion => ( is => ro =>, lazy => 1, lazy_build => 1 );
-sub _build_dz_plugin_minversion { return 0 };
-
+sub _build_dz_plugin_minversion { return 0 }
 
 
 
@@ -96,7 +95,7 @@ sub _build_dz_plugin_minversion { return 0 };
 
 
 has dz_plugin_arguments => ( is => ro =>, lazy => 1, lazy_build => 1 );
-sub _build_dz_plugin_arguments {[]}
+sub _build_dz_plugin_arguments { [] }
 
 
 
@@ -107,10 +106,11 @@ sub _build_dz_plugin_arguments {[]}
 
 
 has dz_plugin_package => ( is => ro =>, lazy => 1, lazy_build => 1 );
+
 sub _build_dz_plugin_package {
   my ($self) = @_;
   return Dist::Zilla::Util->expand_config_package_name( $self->dz_plugin );
-};
+}
 
 around 'dump_config' => config_dumper( __PACKAGE__,
   qw( dz_plugin dz_plugin_name dz_plugin_package dz_plugin_minversion dz_plugin_arguments prereq_to ) );
@@ -157,14 +157,16 @@ sub _split_ini_token {
 }
 
 sub load_dz_plugin {
-  my ($self, $parent_secton) = @_;
- # Here is where we construct the conditional plugin
+  my ( $self, $parent_secton ) = @_;
+
+  # Here is where we construct the conditional plugin
   my $assembler     = $parent_section->sequence->assembler;
   my $child_section = $assembler->section_class->new(
     name     => $self->dz_plugin_name,
     package  => $self->dz_plugin_package,
     sequence => $self->sequence,
   );
+
   # Here is us, adding the arguments to that plugin
   for my $argument ( @{ $self->dz_plugin_arguments } ) {
     $child_section->add_value( $self->_split_ini_token($argument) );
@@ -173,19 +175,43 @@ sub load_dz_plugin {
   $child_section->finalize();
   return;
 }
+
 sub plugin_loader {
   my ( $self, $parent_section ) = @_;
-  $self->load_dz_plugin( $parent_section );
+  $self->load_dz_plugin($parent_section);
   return;
 }
 
 around plugin_from_config => sub {
   my ( $orig, $plugin_class, $name, $arg, $own_section ) = @_;
   my $own_object = $plugin_class->$orig( $name, $arg, $if_section );
-  $own_object->pluginloader( $own_section );
+  $own_object->pluginloader($own_section);
   return $own_object;
 };
 
+
+
+
+
+
+
+sub register_prereqs {
+  my ($self) = @_;
+  my $prereqs = $self->zilla->prereqs;
+
+  my @targets;
+
+  for my $prereq ( @{ $self->prereq_to } ) {
+    next if 'none' eq $prereq;
+    if ( my ( $phase, $relation ) = $prereq =~ $re_prereq ) {
+      push @targets, $prereqs->requirements_for( $phase, $relation );
+    }
+  }
+  for my $target (@targets) {
+    $target->add_string_requirement( $self->dz_plugin_package, $self->dz_plugin_minversion );
+  }
+  return;
+}
 no Moose::Role;
 
 1;
@@ -225,6 +251,11 @@ All of the following support multiple declaration:
 =item * C<prereq_to>
 
 =back
+
+=head2 C<register_prereqs>
+
+By default, registers L</dz_plugin_package> version L</dz_plugin_minimumversion>
+as C<develop.requires> ( as per L</prereq_to> ).
 
 =head1 ATTRIBUTES
 
