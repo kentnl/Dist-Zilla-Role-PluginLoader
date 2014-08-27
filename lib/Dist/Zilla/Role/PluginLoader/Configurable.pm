@@ -12,8 +12,9 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 use Moose::Role qw( has around with );
 use Dist::Zilla::Util;
 use Dist::Zilla::Util::ConfigDumper qw( config_dumper );
-with 'Dist::Zilla::Role::PrereqSource';
-with 'Dist::Zilla::Role::PluginLoader', { exclude => 'logger' };
+with 'Dist::Zilla::Role::PrereqSource','Dist::Zilla::Role::PluginLoader' =>{ 
+  '-excludes' => [ 'logger', 'log','log_debug','log_fatal' ],
+};
 
 
 

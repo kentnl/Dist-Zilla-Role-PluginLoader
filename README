@@ -6,7 +6,7 @@ VERSION
 
 SYNOPSIS
       use Moose;
-      with 'Dist::Zilla::Role::PluginLoader';
+      with 'Dist::Zilla::Role::Plugin', 'Dist::Zilla::Role::PluginLoader';
 
       sub load_plugins {
         my ( $self, $loader ) = @_;

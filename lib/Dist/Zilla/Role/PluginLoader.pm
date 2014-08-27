@@ -14,8 +14,6 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 use Moose::Role qw( has around with requires );
 use Dist::Zilla::Util::PluginLoader;
 
-with 'Dist::Zilla::Role::Plugin';
-
 requires 'load_plugins';
 
 around plugin_from_config => sub {
@@ -47,7 +45,7 @@ version 0.001000
 =head1 SYNOPSIS
 
   use Moose;
-  with 'Dist::Zilla::Role::PluginLoader';
+  with 'Dist::Zilla::Role::Plugin', 'Dist::Zilla::Role::PluginLoader';
 
   sub load_plugins {
     my ( $self, $loader ) = @_;
