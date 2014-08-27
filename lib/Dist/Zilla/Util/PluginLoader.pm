@@ -41,7 +41,7 @@ sub _check_array {
   return $array;
 }
 
-sub _auto_args {
+sub _auto_attrs {
   my $nargs = ( my ( $self, $package, $name, $attrs ) = @_ );
 
   croak "Argument <package> may not be a ref" if ref $package;
