@@ -458,7 +458,7 @@
                      },
                      {
                         "class" : "Pod::Weaver::Section::Generic",
-                        "name" : "WARNING",
+                        "name" : "WARNINGS",
                         "version" : "4.006"
                      },
                      {

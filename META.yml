@@ -314,7 +314,7 @@ x_Dist_Zilla:
               version: '4.006'
             -
               class: Pod::Weaver::Section::Generic
-              name: WARNING
+              name: WARNINGS
               version: '4.006'
             -
               class: Pod::Weaver::Section::Generic

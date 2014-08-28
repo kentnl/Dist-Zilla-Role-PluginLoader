@@ -4,6 +4,39 @@ NAME
 VERSION
     version 0.001000
 
+WARNINGS
+  STOP
+    You probably don't want to use this module. You either want a
+    @PluginBundle, or "PluginLoader::Configurable"
+
+  WHEN YOU WANT THIS MODULE
+    *   You don't want a plugin bundle
+
+    *   You want something harder to understand for people who use your
+        plugin.
+
+    *   You *EXPRESSLY* wish to hide the loaded modules from things like
+        "Dist::Zilla::App::Command::bakeini"
+
+    *   You are loading a single, or handful of modules, all of which are
+        *BLATANTLY* obvious *DIRECTLY* in "dist.ini", except with some
+        special loading semantics.
+
+  ADVICE
+    *   Do make consuming plugins have to declare the loaded plugin somehow
+
+    *   Do make consuming plugins able to directly configure the loaded
+        plugin somehow
+
+    *   If at all possible, load at most, one plugin.
+
+    *   If at all possible, and you are loading only one plugin, use
+        "PluginLoader::Configurable"
+
+    *   If you have read this far, and you still are considering using this
+        Role, please contact me, "kentnl" on "#distzilla@irc.perl.org", and
+        let me convince you not to.
+
 SYNOPSIS
       use Moose;
       with 'Dist::Zilla::Role::Plugin', 'Dist::Zilla::Role::PluginLoader';
@@ -46,39 +79,6 @@ REQUIRES METHODS
       with 'Dist::Zilla::Role::Plugin';
 
     "Dist::Zilla::Role::Plugin"
-
-WARNINGS
-  STOP
-    You probably don't want to use this module. You either want a
-    @PluginBundle, or "PluginLoader::Configurable"
-
-  WHEN YOU WANT THIS MODULE
-    *   You don't want a plugin bundle
-
-    *   You want something harder to understand for people who use your
-        plugin.
-
-    *   You *EXPRESSLY* wish to hide the loaded modules from things like
-        "Dist::Zilla::App::Command::bakeini"
-
-    *   You are loading a single, or handful of modules, all of which are
-        *BLATANTLY* obvious *DIRECTLY* in "dist.ini", except with some
-        special loading semantics.
-
-  ADVICE
-    *   Do make consuming plugins have to declare the loaded plugin somehow
-
-    *   Do make consuming plugins able to directly configure the loaded
-        plugin somehow
-
-    *   If at all possible, load at most, one plugin.
-
-    *   If at all possible, and you are loading only one plugin, use
-        "PluginLoader::Configurable"
-
-    *   If you have read this far, and you still are considering using this
-        Role, please contact me, "kentnl" on "#distzilla@irc.perl.org", and
-        let me convince you not to.
 
 AUTHOR
     Kent Fredric <kentfredric@gmail.com>
