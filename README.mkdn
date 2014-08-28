@@ -1,0 +1,91 @@
+# NAME
+
+Dist::Zilla::Role::PluginLoader - A Plugin that can load others.
+
+# VERSION
+
+version 0.001000
+
+# WARNINGS
+
+## STOP
+
+You probably don't want to use this module. You either want a `@PluginBundle`, or [`PluginLoader::Configurable`
+](https://metacpan.org/pod/Dist::Zilla::Role::PluginLoader::Configurable)
+
+## WHEN YOU WANT THIS MODULE
+
+- You don't want a plugin bundle
+- You want something harder to understand for people who use your plugin.
+- You **_EXPRESSLY_** wish to hide the loaded modules from things like [`Dist::Zilla::App::Command::bakeini`
+](https://metacpan.org/pod/Dist::Zilla::App::Command::bakeini)
+- You are loading a single, or handful of modules, all of which are _BLATANTLY_ obvious _DIRECTLY_ in `dist.ini`,
+except with some special loading semantics.
+
+## ADVICE
+
+- Do make consuming plugins have to declare the loaded plugin somehow
+- Do make consuming plugins able to directly configure the loaded plugin somehow
+- If at all possible, load at most, one plugin.
+- If at all possible, and you are loading only one plugin, use [`PluginLoader::Configurable`
+](https://metacpan.org/pod/Dist::Zilla::Role::PluginLoader::Configurable)
+- If you have read this far, and you still are considering using this Role, please contact me, `kentnl` on
+`#distzilla@irc.perl.org`, and let me convince you not to.
+
+# SYNOPSIS
+
+    use Moose;
+    with 'Dist::Zilla::Role::Plugin', 'Dist::Zilla::Role::PluginLoader';
+
+    sub load_plugins {
+      my ( $self, $loader ) = @_;
+      # Load raw config
+      $loader->load    ( 'GatherDir', 'GatherDir-for-FooPlugin',  [ include_dotfiles => 1, key => value,   ... ]);
+      # Load using ini style input
+      $loader->load_ini( 'GatherDir', 'GatherDir2-for-FooPlugin', [ 'include_dotfiles = 1', 'key = value', ... ]);
+    }
+
+# REQUIRES METHODS
+
+## `load_plugins`
+
+Signature:
+
+    void < load_plugins( $self, $loader );
+
+    $loader isa Dist::Zilla::Util::PluginLoader;
+
+See [`Dist::Zilla::Util::PluginLoader`](https://metacpan.org/pod/Dist::Zilla::Util::PluginLoader) for details.
+
+## `plugin_from_config`
+
+Signature:
+
+    $object < plugin_from_config( $class, $plugin_name, $args, $section )
+
+    $object does Dist::Zilla::Role::Plugin
+
+    $class does Dist::Zilla::Role::Plugin
+
+    $plugin_name is Str
+
+    $args is HashRef
+
+    $section isa Config::MVP::Section
+
+Recommended Provider:
+
+    with 'Dist::Zilla::Role::Plugin';
+
+[`Dist::Zilla::Role::Plugin`](https://metacpan.org/pod/Dist::Zilla::Role::Plugin)
+
+# AUTHOR
+
+Kent Fredric <kentfredric@gmail.com>
+
+# COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2014 by Kent Fredric <kentfredric@gmail.com>.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
