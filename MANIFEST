@@ -9,6 +9,7 @@ META.yml
 Makefile.PL
 README
 dist.ini
+dist.ini.meta
 lib/Dist/Zilla/Role/PluginLoader.pm
 lib/Dist/Zilla/Role/PluginLoader/Configurable.pm
 lib/Dist/Zilla/Util/PluginLoader.pm
