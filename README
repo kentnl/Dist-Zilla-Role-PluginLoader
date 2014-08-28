@@ -49,9 +49,33 @@ WARNINGS
         Role, please contact me, "kentnl" on "#distzilla@irc.perl.org", and
         let me convince you not to.
 
-QUICK REFERENCE
-      [>] load_plugins
-      [>] plugin_from_config
+    Signature:
+
+      void < load_plugins( $self, $loader );
+
+      $loader isa Dist::Zilla::Util::PluginLoader;
+
+    See "Dist::Zilla::Util::PluginLoader" for details.
+
+    Signature:
+
+      $object < plugin_from_config( $class, $plugin_name, $args, $section )
+
+      $object does Dist::Zilla::Role::Plugin
+
+      $class does Dist::Zilla::Role::Plugin
+
+      $plugin_name is Str
+
+      $args is HashRef
+
+      $section isa Config::MVP::Section
+
+    Recommended Provider:
+
+      with 'Dist::Zilla::Role::Plugin';
+
+    "Dist::Zilla::Role::Plugin"
 
 AUTHOR
     Kent Fredric <kentfredric@gmail.com>
@@ -62,4 +86,14 @@ COPYRIGHT AND LICENSE
 
     This is free software; you can redistribute it and/or modify it under
     the same terms as the Perl 5 programming language system itself.
+
+POD ERRORS
+    Hey! The above document had some coding errors, which are explained
+    below:
+
+    Around line 106:
+        Unknown directive: =requires
+
+    Around line 116:
+        Unknown directive: =requires
 

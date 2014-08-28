@@ -103,10 +103,37 @@ C<#distzilla@irc.perl.org>, and let me convince you not to.
 
 =back
 
-=head1 QUICK REFERENCE
+=requires C<load_plugins>
 
-  [>] load_plugins
-  [>] plugin_from_config
+Signature:
+
+  void < load_plugins( $self, $loader );
+
+  $loader isa Dist::Zilla::Util::PluginLoader;
+
+See L<< C<Dist::Zilla::Util::PluginLoader>|Dist::Zilla::Util::PluginLoader >> for details.
+
+=requires C<plugin_from_config>
+
+Signature:
+
+  $object < plugin_from_config( $class, $plugin_name, $args, $section )
+
+  $object does Dist::Zilla::Role::Plugin
+
+  $class does Dist::Zilla::Role::Plugin
+
+  $plugin_name is Str
+
+  $args is HashRef
+
+  $section isa Config::MVP::Section
+
+Recommended Provider:
+
+  with 'Dist::Zilla::Role::Plugin';
+
+L<< C<Dist::Zilla::Role::Plugin>|Dist::Zilla::Role::Plugin >>
 
 =head1 AUTHOR
 

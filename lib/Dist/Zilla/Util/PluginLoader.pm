@@ -47,6 +47,8 @@ sub _check_array {
 sub _auto_attrs {
   my $nargs = ( my ( $self, $package, $name, $attrs ) = @_ );
 
+  croak 'Not enough arguments to load()' if $nargs < 2;
+
   croak 'Argument <package> may not be a ref' if ref $package;
 
   if ( 2 == $nargs ) {
@@ -122,6 +124,73 @@ version 0.001000
   my $loader = Dist::Zilla::Util::PluginLoader->new( sequence => $sequence );
   $loader->load( $plugin, $name, [ key => value , key => value ]);
   $loader->load_ini( $plugin, $name, [ 'key = value', 'key = value' ] );
+
+=head1 METHODS
+
+=head2 C<load>
+
+Load a Dist::Zilla plugin meeting specification.
+
+Signatures:
+
+  void load( $self, $plugin )
+  void load( $self, $plugin, \@args );
+  void load( $self, $plugin, $name  );
+  void load( $self, $plugin, $name, \@args );
+ 
+  $plugin is Str ( Dist::Zilla Plugin )
+  $name   is Str ( Dist::Zilla Section Name )
+  @args   is ArrayRef
+              num items == even
+              key => value pairs of scalars.
+
+Constructs an instance of C<$plugin>, using C<$name> where possible,
+and uses C<@args> to populate the C<MVP> properties for that C<$plugin>,
+and then injects it to the C<< ->sequence >> passed earlier.
+
+=head2 C<load>
+
+Load a Dist::Zilla plugin meeting specification with unparsed
+C<INI> C<key = value> strings.
+
+Signatures:
+
+  void load( $self, $plugin )
+  void load( $self, $plugin, \@args );
+  void load( $self, $plugin, $name  );
+  void load( $self, $plugin, $name, \@args );
+ 
+  $plugin is Str ( Dist::Zilla Plugin )
+  $name   is Str ( Dist::Zilla Section Name )
+  @args   is ArrayRef of Str
+            each Str is 'key = value'
+
+Constructs an instance of C<$plugin>, using C<$name> where possible,
+and parses and uses C<@args> to populate the C<MVP> properties for that C<$plugin>,
+and then injects it to the C<< ->sequence >> passed earlier.
+
+=head1 ATTRIBUTES
+
+=head2 C<sequence>
+
+A C<Config::MVP::Sequence> object.
+
+The easiest way to get one of those is:
+
+  around plugin_from_config {
+    my ($orig,$self,$name,$arg, $section ) = @_;
+                                ^^^^^^^^
+  }
+
+=head2 C<assembler>
+
+A C<Config::MVP::Assembler>
+
+Autoloaded from C<sequence>.
+
+=head2 C<section_class>
+
+Autoloaded from C<assembler>.
 
 =head1 AUTHOR
 
