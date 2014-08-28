@@ -3,7 +3,6 @@ abstract: 'A Plugin that can load others.'
 author:
   - 'Kent Fredric <kentfredric@gmail.com>'
 build_requires:
-  Dist::Zilla::Plugin::Injected: '0'
   Dist::Zilla::Role::Plugin: '0'
   Dist::Zilla::Util::Test::KENTNL: '0'
   ExtUtils::MakeMaker: '0'
@@ -43,8 +42,6 @@ requires:
   warnings: '0'
 version: '0.001000'
 x_BuiltWith:
-  failures:
-    Dist::Zilla::Plugin::Injected: 'module was not found in INC'
   modules:
     CPAN::Meta: '2.142060'
     Carp: '1.34'

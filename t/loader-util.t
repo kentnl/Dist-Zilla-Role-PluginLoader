@@ -9,7 +9,8 @@ use Dist::Zilla::Util::ConfigDumper qw( dump_plugin );
 use Dist::Zilla::Util::PluginLoader;
 
 {
-  package        Dist::Zilla::Plugin::Injected;
+  package   #
+     Dist::Zilla::Plugin::Injected;
   use Moose;
   with 'Dist::Zilla::Role::Plugin';
   use Dist::Zilla::Util::ConfigDumper qw( dump_plugin config_dumper );
@@ -38,14 +39,14 @@ use Dist::Zilla::Util::PluginLoader;
     Dist::Zilla::Plugin::InjectedB;
   use Moose;
   extends    #
-    'Dist::Zilla::Plugin::Injected';
+    @{['Dist::Zilla::Plugin::Injected']};
 }
 {
   package    #
     Dist::Zilla::Plugin::InjectedC;
   use Moose;
   extends    #
-    'Dist::Zilla::Plugin::Injected';
+    @{['Dist::Zilla::Plugin::Injected']};
 }
 
 my $expected_plugins = 0;

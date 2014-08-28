@@ -31,7 +31,6 @@ my %WriteMakefileArgs = (
     "warnings" => 0
   },
   "TEST_REQUIRES" => {
-    "Dist::Zilla::Plugin::Injected" => 0,
     "Dist::Zilla::Role::Plugin" => 0,
     "Dist::Zilla::Util::Test::KENTNL" => 0,
     "ExtUtils::MakeMaker" => 0,
@@ -49,7 +48,6 @@ my %WriteMakefileArgs = (
 
 my %FallbackPrereqs = (
   "Carp" => 0,
-  "Dist::Zilla::Plugin::Injected" => 0,
   "Dist::Zilla::Role::Plugin" => 0,
   "Dist::Zilla::Role::PrereqSource" => 0,
   "Dist::Zilla::Util" => 0,
