@@ -49,6 +49,10 @@ WARNINGS
         Role, please contact me, "kentnl" on "#distzilla@irc.perl.org", and
         let me convince you not to.
 
+QUICK REFERENCE
+      [>] load_plugins
+      [>] plugin_from_config
+
 AUTHOR
     Kent Fredric <kentfredric@gmail.com>
 

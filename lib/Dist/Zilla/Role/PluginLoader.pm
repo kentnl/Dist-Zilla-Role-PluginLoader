@@ -15,6 +15,7 @@ use Moose::Role qw( has around with requires );
 use Dist::Zilla::Util::PluginLoader;
 
 requires 'load_plugins';
+requires 'plugin_from_config';
 
 around plugin_from_config => sub {
   my ( $orig, $plugin_class, $name, $arg, $own_section ) = @_;
@@ -101,6 +102,11 @@ C<PluginLoader::Configurable>
 C<#distzilla@irc.perl.org>, and let me convince you not to.
 
 =back
+
+=head1 QUICK REFERENCE
+
+  [>] load_plugins
+  [>] plugin_from_config
 
 =head1 AUTHOR
 

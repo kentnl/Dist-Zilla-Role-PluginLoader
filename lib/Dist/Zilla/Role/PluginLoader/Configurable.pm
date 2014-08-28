@@ -16,83 +16,13 @@ use Dist::Zilla::Util;
 use Dist::Zilla::Util::ConfigDumper qw( config_dumper );
 with 'Dist::Zilla::Role::PrereqSource', 'Dist::Zilla::Role::PluginLoader';
 
-
-
-
-
-
-
-
-
-
-
-
-
 has dz_plugin => ( is => ro =>, required => 1 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 has dz_plugin_name => ( is => ro =>, lazy => 1, lazy_build => 1 );
 sub _build_dz_plugin_name { my ($self) = @_; return $self->dz_plugin; }
 
-
-
-
-
-
-
-
-
 has dz_plugin_minversion => ( is => ro =>, lazy => 1, lazy_build => 1 );
 sub _build_dz_plugin_minversion { return 0 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 has dz_plugin_arguments => ( is => ro =>, lazy => 1, lazy_build => 1 );
 sub _build_dz_plugin_arguments { return [] }
@@ -100,36 +30,12 @@ sub _build_dz_plugin_arguments { return [] }
 has prereq_to => ( is => ro =>, lazy => 1, lazy_build => 1 );
 sub _build_prereq_to { return ['develop.requires'] }
 
-
-
-
-
-
-
-
-
-
-
 sub mvp_aliases {
   return {
     q{>}                  => 'dz_plugin_arguments',
     q[dz_plugin_argument] => 'dz_plugin_arguments',
   };
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 sub mvp_multivalue_args {
   return qw( dz_plugin_arguments prereq_to );
@@ -140,13 +46,6 @@ sub load_plugins {
   $loader->load_ini( $self->dz_plugin, $self->dz_plugin_name, $self->dz_plugin_arguments );
   return;
 }
-
-
-
-
-
-
-
 
 my $re_phases   = qr/configure|build|test|runtime|develop/msx;
 my $re_relation = qr/requires|recommends|suggests|conflicts/msx;
@@ -211,6 +110,22 @@ All of the following support multiple declaration:
 
 =back
 
+=head2 C<load_plugins>
+
+This is where by default the child plugin itself is loaded.
+
+If you want to make the loading of a child plugin conditional, wrapping
+this method is recommended as follows:
+
+  around load_plugins => sub {
+    my ( $orig, $self, $loader ) = @_;
+    # conditional code here
+    return if $dont_load_them;
+    return $self->$orig($loader);
+  };
+
+You can also do more fancy things with C<$loader>, but it is not advised.
+
 =head2 C<register_prereqs>
 
 By default, registers L</dz_plugin_package> version L</dz_plugin_minimumversion>
@@ -264,21 +179,35 @@ For convenience, this attribute has an alias of '>' ( mnemonic "Forward" ), so t
 
 Would be written
 
-  [if]
+  [YourPlugin]
   dz_plugin = GatherDir
-  ?= $ENV{dogatherdir}
   >= include_dotfiles = 1
   >= exclude_file = bad
   >= exclude_file = bad2
 
 Or in crazy long form
 
-  [if]
+  [YourPlugin]
   dz_plugin = GatherDir
-  condtion = $ENV{dogatherdir}
   dz_plugin_argument = include_dotfiles = 1
   dz_plugin_argument = exclude_file = bad
   dz_plugin_argument = exclude_file = bad2
+
+=head2 C<prereq_to>
+
+This determines where dependencies get injected.
+
+Default is:
+
+  develop.requires
+
+And a special value
+
+  none
+
+Prevents dependency injection.
+
+This attribute may be specified multiple times.
 
 =head1 AUTHOR
 

@@ -74,7 +74,7 @@ sub load {
   my ( $self, @args ) = @_;
   my ( $package, $name, $attrs ) = $self->_auto_attrs(@args);
 
-  croak 'Not an even number of attribute values, should be a key => value sequence.' if scalar @{$attrs} % 2 == 0;
+  croak 'Not an even number of attribute values, should be a key => value sequence.' if ( scalar @{$attrs} % 2 ) != 0;
 
   my $child_section = $self->section_class->new(
     name    => $name,
