@@ -458,6 +458,11 @@
                      },
                      {
                         "class" : "Pod::Weaver::Section::Generic",
+                        "name" : "WARNING",
+                        "version" : "4.006"
+                     },
+                     {
+                        "class" : "Pod::Weaver::Section::Generic",
                         "name" : "SYNOPSIS",
                         "version" : "4.006"
                      },
@@ -469,6 +474,11 @@
                      {
                         "class" : "Pod::Weaver::Section::Generic",
                         "name" : "OVERVIEW",
+                        "version" : "4.006"
+                     },
+                     {
+                        "class" : "Pod::Weaver::Section::Collect",
+                        "name" : "REQUIRES METHODS",
                         "version" : "4.006"
                      },
                      {

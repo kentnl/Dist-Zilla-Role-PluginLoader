@@ -314,6 +314,10 @@ x_Dist_Zilla:
               version: '4.006'
             -
               class: Pod::Weaver::Section::Generic
+              name: WARNING
+              version: '4.006'
+            -
+              class: Pod::Weaver::Section::Generic
               name: SYNOPSIS
               version: '4.006'
             -
@@ -323,6 +327,10 @@ x_Dist_Zilla:
             -
               class: Pod::Weaver::Section::Generic
               name: OVERVIEW
+              version: '4.006'
+            -
+              class: Pod::Weaver::Section::Collect
+              name: 'REQUIRES METHODS'
               version: '4.006'
             -
               class: Pod::Weaver::Section::Collect
