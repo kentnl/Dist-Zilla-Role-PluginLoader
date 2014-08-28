@@ -5,7 +5,7 @@ use utf8;
 
 package Dist::Zilla::Util::PluginLoader;
 
-our $VERSION = '0.001000';
+our $VERSION = '0.001001';
 
 # ABSTRACT: Inflate a Legal Dist::Zilla Plugin from basic parts
 
