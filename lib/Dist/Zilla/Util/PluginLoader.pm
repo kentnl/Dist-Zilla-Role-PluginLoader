@@ -148,7 +148,7 @@ Constructs an instance of C<$plugin>, using C<$name> where possible,
 and uses C<@args> to populate the C<MVP> properties for that C<$plugin>,
 and then injects it to the C<< ->sequence >> passed earlier.
 
-=head2 C<load>
+=head2 C<load_ini>
 
 Load a Dist::Zilla plugin meeting specification with unparsed
 C<INI> C<key = value> strings.
