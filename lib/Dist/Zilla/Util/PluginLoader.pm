@@ -150,7 +150,7 @@ and then injects it to the C<< ->sequence >> passed earlier.
 
 =head2 C<load_ini>
 
-Load a Dist::Zilla plugin meeting specification with unparsed
+Load a Dist::Zilla plugin meeting specification with un-parsed
 C<INI> C<key = value> strings.
 
 Signatures:
@@ -186,11 +186,11 @@ The easiest way to get one of those is:
 
 A C<Config::MVP::Assembler>
 
-Autoloaded from C<sequence>.
+Defaults to C<< sequence->assembler >>
 
 =head2 C<section_class>
 
-Autoloaded from C<assembler>.
+Defaults to C<< assembler->section_class >>
 
 =head1 AUTHOR
 
