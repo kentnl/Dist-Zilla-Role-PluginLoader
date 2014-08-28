@@ -150,7 +150,7 @@ and then injects it to the C<< ->sequence >> passed earlier.
 
 =head2 C<load_ini>
 
-Load a Dist::Zilla plugin meeting specification with un-parsed
+Load a Dist::Zilla plugin meeting specification with unparsed
 C<INI> C<key = value> strings.
 
 Signatures:
