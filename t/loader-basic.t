@@ -30,10 +30,10 @@ $test->add_file( 'dist.ini', simple_ini('Example') );
 $test->build_ok;
 is(
 
-  ( scalar grep { $_->isa('Dist::Zilla::Plugin::Example') } @{ $test->builder->plugins } ), 
+  ( scalar grep { $_->isa('Dist::Zilla::Plugin::Example') } @{ $test->builder->plugins } ),
   7, "One plugin recursively loads 7"
 );
 for my $plugin ( @{ $test->builder->plugins } ) {
-  note explain dump_plugin($plugin);  
+  note explain dump_plugin($plugin);
 }
 done_testing;
