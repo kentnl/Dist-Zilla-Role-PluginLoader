@@ -137,7 +137,7 @@ Signatures:
   void load( $self, $plugin, \@args );
   void load( $self, $plugin, $name  );
   void load( $self, $plugin, $name, \@args );
- 
+
   $plugin is Str ( Dist::Zilla Plugin )
   $name   is Str ( Dist::Zilla Section Name )
   @args   is ArrayRef
@@ -159,7 +159,7 @@ Signatures:
   void load( $self, $plugin, \@args );
   void load( $self, $plugin, $name  );
   void load( $self, $plugin, $name, \@args );
- 
+
   $plugin is Str ( Dist::Zilla Plugin )
   $name   is Str ( Dist::Zilla Section Name )
   @args   is ArrayRef of Str
