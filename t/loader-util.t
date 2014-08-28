@@ -15,23 +15,22 @@ use Dist::Zilla::Util::PluginLoader;
   with 'Dist::Zilla::Role::Plugin';
   use Dist::Zilla::Util::ConfigDumper qw( dump_plugin config_dumper );
 
-
   has payload => ( is => ro => );
   has section => ( is => ro => );
 
-  around dump_config => config_dumper(__PACKAGE__, { attrs => [qw( payload section )] });
+  around dump_config => config_dumper( __PACKAGE__, { attrs => [qw( payload section )] } );
 
   sub plugin_from_config {
     my ( $class, $name, $arg, $section ) = @_;
 
     return $class->new(
-        {
-          %{$arg},
-          plugin_name => $name,
-          zilla       => $section->sequence->assembler->zilla,
-          payload     => $arg,
-          section     => $section, 
-        }
+      {
+        %{$arg},
+        plugin_name => $name,
+        zilla       => $section->sequence->assembler->zilla,
+        payload     => $arg,
+        section     => $section,
+      }
     );
   }
 }
@@ -39,13 +38,15 @@ use Dist::Zilla::Util::PluginLoader;
   package    #
     Dist::Zilla::Plugin::InjectedB;
   use Moose;
-  extends 'Dist::Zilla::Plugin::Injected';
+  extends    #
+    'Dist::Zilla::Plugin::Injected';
 }
 {
   package    #
     Dist::Zilla::Plugin::InjectedC;
   use Moose;
-  extends 'Dist::Zilla::Plugin::Injected';
+  extends    #
+    'Dist::Zilla::Plugin::Injected';
 }
 
 my $expected_plugins = 0;
@@ -62,15 +63,15 @@ my $expected_plugins = 0;
     my $own_object = $plugin_class->$orig( $name, $arg, $own_section );
     my $loader = Dist::Zilla::Util::PluginLoader->new( sequence => $own_section->sequence );
     $expected_plugins++;
-    $loader->load('Injected','InjectedName', [ key => 'value', key2 => 'value' ]);
+    $loader->load( 'Injected', 'InjectedName', [ key => 'value', key2 => 'value' ] );
     $expected_plugins++;
-    $loader->load_ini('Injected','InjectedIni', [ 'key = value' , 'key2 = value ' ]);
+    $loader->load_ini( 'Injected', 'InjectedIni', [ 'key = value', 'key2 = value ' ] );
     $expected_plugins++;
-    $loader->load('Injected', [ key => 'value', key2 => 'value' ]);
+    $loader->load( 'Injected', [ key => 'value', key2 => 'value' ] );
     $expected_plugins++;
     $loader->load('InjectedB');
     $expected_plugins++;
-    $loader->load('InjectedC',undef, [ key => 'value', key2 => 'value' ]);
+    $loader->load( 'InjectedC', undef, [ key => 'value', key2 => 'value' ] );
 
     return $own_object;
   };

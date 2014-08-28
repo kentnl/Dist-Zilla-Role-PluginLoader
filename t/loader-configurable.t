@@ -13,7 +13,7 @@ use Test::Differences;
   package    #
     Dist::Zilla::Plugin::Injected;
   use Moose;
-  with 'Dist::Zilla::Role::Plugin';
+  with       'Dist::Zilla::Role::Plugin';
   use Dist::Zilla::Util::ConfigDumper qw( dump_plugin config_dumper );
 
   has payload => ( is => ro => );
