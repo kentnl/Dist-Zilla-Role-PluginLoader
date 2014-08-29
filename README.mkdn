@@ -4,7 +4,7 @@ Dist::Zilla::Role::PluginLoader - A Plugin that can load others.
 
 # VERSION
 
-version 0.001001
+version 0.001002
 
 # WARNINGS
 
