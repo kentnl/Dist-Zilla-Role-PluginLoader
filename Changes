@@ -1,6 +1,8 @@
 Release history for Dist-Zilla-Role-PluginLoader
 
 {{$NEXT}}
+
+0.001001 2014-08-29T09:59:08Z
  [Bugfix]
  - Avoid no-build-dir fails.
 
