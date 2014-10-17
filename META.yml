@@ -1,7 +1,7 @@
 ---
 abstract: 'A Plugin that can load others.'
 author:
-  - 'Kent Fredric <kentfredric@gmail.com>'
+  - 'Kent Fredric <kentnl@cpan.org>'
 build_requires:
   Dist::Zilla::Role::Plugin: '0'
   Dist::Zilla::Util::Test::KENTNL: '1.003001'

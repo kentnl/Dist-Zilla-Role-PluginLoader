@@ -139,7 +139,7 @@ L<< C<Dist::Zilla::Role::Plugin>|Dist::Zilla::Role::Plugin >>
 
 =head1 AUTHOR
 
-Kent Fredric <kentfredric@gmail.com>
+Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
