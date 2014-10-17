@@ -5,7 +5,7 @@ use utf8;
 
 package Dist::Zilla::Role::PluginLoader::Configurable;
 
-our $VERSION = '0.001002';
+our $VERSION = '0.001003';
 
 # ABSTRACT: A role for plugins that load user defined and configured plugins
 

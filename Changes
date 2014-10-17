@@ -1,6 +1,8 @@
 Release history for Dist-Zilla-Role-PluginLoader
 
 {{$NEXT}}
+
+0.001002 2014-10-17T08:34:14Z 9f73b47
  [Bugfix]
  - Wrap mvp methods from ancestry classes instead of clobbering them.
  - This also avoids a method collision on older moose.
