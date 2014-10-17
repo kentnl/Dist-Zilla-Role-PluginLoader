@@ -1,6 +1,13 @@
 Release history for Dist-Zilla-Role-PluginLoader
 
 {{$NEXT}}
+ [Dependencies::Stats]
+ - Dependencies changed since 0.001001, see misc/*.deps* for details
+ - develop: +2 ↑1 (suggests: ↑1)
+ - test: (recommends: ↑1)
+
+ [Metadata]
+ - author = kentnl@cpan.org
 
 0.001001 2014-08-29T09:59:08Z
  [Bugfix]
