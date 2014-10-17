@@ -5,7 +5,7 @@ use utf8;
 
 package Dist::Zilla::Role::PluginLoader::Configurable;
 
-our $VERSION = '0.001001';
+our $VERSION = '0.001002';
 
 # ABSTRACT: A role for plugins that load user defined and configured plugins
 
@@ -30,16 +30,22 @@ sub _build_dz_plugin_arguments { return [] }
 has prereq_to => ( is => ro =>, lazy => 1, lazy_build => 1 );
 sub _build_prereq_to { return ['develop.requires'] }
 
-sub mvp_aliases {
-  return {
-    q{>}                  => 'dz_plugin_arguments',
-    q[dz_plugin_argument] => 'dz_plugin_arguments',
-  };
-}
+# Inherited from Role::Plugin
+#   Via Role::PrereqSource
+around mvp_aliases => sub {
+  my ( $orig, $self, @args ) = @_;
+  my $hash = $self->$orig(@args);
+  $hash = {} unless defined $hash;
+  $hash->{q{>}}                  = 'dz_plugin_arguments';
+  $hash->{q{dz_plugin_argument}} = 'dz_plugin_arguments';
+  return $hash;
+};
 
-sub mvp_multivalue_args {
-  return qw( dz_plugin_arguments prereq_to );
-}
+around mvp_multivalue_args => sub {
+  my ( $orig, $self, @args ) = @_;
+  my (@items) = $self->$orig(@args);
+  return ( qw( dz_plugin_arguments prereq_to ), @items );
+};
 
 sub load_plugins {
   my ( $self, $loader ) = @_;
@@ -86,7 +92,7 @@ Dist::Zilla::Role::PluginLoader::Configurable - A role for plugins that load use
 
 =head1 VERSION
 
-version 0.001001
+version 0.001002
 
 =head1 METHODS
 
@@ -211,7 +217,7 @@ This attribute may be specified multiple times.
 
 =head1 AUTHOR
 
-Kent Fredric <kentfredric@gmail.com>
+Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 

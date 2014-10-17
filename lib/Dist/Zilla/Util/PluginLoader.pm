@@ -5,7 +5,7 @@ use utf8;
 
 package Dist::Zilla::Util::PluginLoader;
 
-our $VERSION = '0.001001';
+our $VERSION = '0.001002';
 
 # ABSTRACT: Inflate a Legal Dist::Zilla Plugin from basic parts
 
@@ -115,7 +115,7 @@ Dist::Zilla::Util::PluginLoader - Inflate a Legal Dist::Zilla Plugin from basic 
 
 =head1 VERSION
 
-version 0.001001
+version 0.001002
 
 =head1 SYNOPSIS
 
@@ -194,7 +194,7 @@ Defaults to C<< assembler->section_class >>
 
 =head1 AUTHOR
 
-Kent Fredric <kentfredric@gmail.com>
+Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
