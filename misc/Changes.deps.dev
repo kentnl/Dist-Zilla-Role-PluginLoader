@@ -1,6 +1,8 @@
 This file contains changes to DEVELOPMENT dependencies only ( both REQUIRED and OPTIONAL )
 
-0.001002
+0.001003
+
+0.001002 2014-10-17T08:34:14Z
  [Added / develop requires]
  - Dist::Zilla 5
  - Dist::Zilla::Plugin::Prereqs::AuthorDeps
