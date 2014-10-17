@@ -5,7 +5,7 @@ use utf8;
 
 package Dist::Zilla::Role::PluginLoader;
 
-our $VERSION = '0.001002';
+our $VERSION = '0.001003';
 
 # ABSTRACT: A Plugin that can load others.
 
@@ -41,7 +41,7 @@ Dist::Zilla::Role::PluginLoader - A Plugin that can load others.
 
 =head1 VERSION
 
-version 0.001002
+version 0.001003
 
 =head1 WARNINGS
 
