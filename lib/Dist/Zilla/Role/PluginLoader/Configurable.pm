@@ -30,16 +30,22 @@ sub _build_dz_plugin_arguments { return [] }
 has prereq_to => ( is => ro =>, lazy => 1, lazy_build => 1 );
 sub _build_prereq_to { return ['develop.requires'] }
 
-sub mvp_aliases {
-  return {
-    q{>}                  => 'dz_plugin_arguments',
-    q[dz_plugin_argument] => 'dz_plugin_arguments',
-  };
-}
+# Inherited from Role::Plugin
+#   Via Role::PrereqSource
+around mvp_aliases => sub {
+  my ( $orig, $self, @args ) = @_;
+  my $hash = $self->$orig(@args);
+  $hash = {} unless defined $hash;
+  $hash->{q{>}}                  = 'dz_plugin_arguments';
+  $hash->{q{dz_plugin_argument}} = 'dz_plugin_arguments';
+  return $hash;
+};
 
-sub mvp_multivalue_args {
-  return qw( dz_plugin_arguments prereq_to );
-}
+around mvp_multivalue_args => sub {
+  my ( $orig, $self, @args ) = @_;
+  my (@items) = $self->$orig(@args);
+  return ( qw( dz_plugin_arguments prereq_to ), @items );
+};
 
 sub load_plugins {
   my ( $self, $loader ) = @_;
