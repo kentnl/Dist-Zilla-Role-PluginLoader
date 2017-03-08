@@ -91,7 +91,6 @@ do { my $x = {
                                       'Moose::Role' => '0',
                                       'perl' => '5.010',
                                       'strict' => '0',
-                                      'utf8' => '0',
                                       'warnings' => '0'
                                     }
                     },
