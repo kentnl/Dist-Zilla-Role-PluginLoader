@@ -1,6 +1,8 @@
 Release history for Dist-Zilla-Role-PluginLoader
 
 {{$NEXT}}
+
+0.001003 2017-03-08T09:45:33Z 3e54ed2
  - Bugfix: Avoid test failures with -Ddefault_inc_excludes_dot
  - Roles now export more metadata to metaconfig
  - Stop using Test::KENTNL/dztest in tests
