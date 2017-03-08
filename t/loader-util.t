@@ -2,9 +2,8 @@
 use strict;
 use warnings;
 
-use Test::More;
-use Test::DZil qw( simple_ini );
-use Dist::Zilla::Util::Test::KENTNL qw( dztest );
+use Test::More tests => 1;
+use Test::DZil qw( simple_ini Builder );
 use Dist::Zilla::Util::ConfigDumper qw( dump_plugin );
 use Dist::Zilla::Util::PluginLoader;
 
@@ -78,15 +77,13 @@ my $expected_plugins = 0;
 
 }
 
-my $test = dztest();
-$test->add_file( 'dist.ini', simple_ini('Example') );
-$test->build_ok;
+my $zilla = Builder->from_config({ dist_root => 'invalid'}, { add_files => { 'source/dist.ini' => simple_ini('Example')}});
+$zilla->chrome->logger->set_debug(1);
+$zilla->build;
 is(
-
-  ( scalar grep { $_->isa('Dist::Zilla::Plugin::Injected') } @{ $test->builder->plugins } ),
+  ( scalar grep { $_->isa('Dist::Zilla::Plugin::Injected') } @{ $zilla->plugins } ),
   $expected_plugins, "One plugin loads $expected_plugins"
 );
-for my $plugin ( @{ $test->builder->plugins } ) {
+for my $plugin ( @{ $zilla->plugins } ) {
   note explain dump_plugin($plugin);
 }
-done_testing;
