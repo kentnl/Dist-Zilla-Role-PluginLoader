@@ -46,6 +46,18 @@ around mvp_multivalue_args => sub {
   return ( qw( dz_plugin_arguments prereq_to ), @items );
 };
 
+around dump_config => sub {
+  my ( $orig, $self, @args ) = @_;
+  my $config = $self->$orig(@args);
+  my $localconf = $config->{ +__PACKAGE__ } = {};
+
+  $localconf->{dz_plugin} = $self->dz_plugin;
+  for my $attr (qw( dz_plugin_name dz_plugin_minversion dz_plugin_arguments prereq_to )) {
+    $localconf->{attr} = $self->can($attr)->($self) if $self->meta->find_attribute_by_name($attr)->has_value($self);
+  }
+  $localconf->{ q[$] . __PACKAGE__ . '::VERSION' } = $VERSION;
+  return $config;
+};
 no Moose::Role;
 
 sub load_plugins {

@@ -25,6 +25,16 @@ around plugin_from_config => sub {
   return $own_object;
 };
 
+around dump_config => sub {
+  my ( $orig, $self, @args ) = @_;
+  my $config = $self->$orig(@args);
+  my $localconf = $config->{ +__PACKAGE__ } = {};
+  $localconf->{ q[$] . __PACKAGE__ . '::VERSION' } = $VERSION;
+  $localconf->{ q[$] . q[Dist::Zilla::Util::PluginLoader::VERSION] } = $Dist::Zilla::Util::PluginLoader::VERSION;
+
+  return $config;
+};
+
 no Moose::Role;
 
 1;

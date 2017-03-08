@@ -2,6 +2,7 @@ Release history for Dist-Zilla-Role-PluginLoader
 
 {{$NEXT}}
  - Bugfix: Avoid test failures with -Ddefault_inc_excludes_dot
+ - Roles now export more metadata to metaconfig
 
  [Dependencies::Stats]
  - Dependencies changed since 0.001002, see misc/*.deps* for details
