@@ -20,7 +20,6 @@ my %WriteMakefileArgs = (
     "Carp" => 0,
     "Dist::Zilla::Role::PrereqSource" => 0,
     "Dist::Zilla::Util" => 0,
-    "Dist::Zilla::Util::ConfigDumper" => 0,
     "Moose" => 0,
     "Moose::Role" => 0,
     "strict" => 0,
@@ -29,6 +28,7 @@ my %WriteMakefileArgs = (
   },
   "TEST_REQUIRES" => {
     "Dist::Zilla::Role::Plugin" => 0,
+    "Dist::Zilla::Util::ConfigDumper" => 0,
     "Dist::Zilla::Util::Test::KENTNL" => "1.003001",
     "ExtUtils::MakeMaker" => 0,
     "File::Spec" => 0,
