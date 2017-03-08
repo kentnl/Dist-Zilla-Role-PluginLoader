@@ -14,6 +14,9 @@ This file contains changes in REQUIRED dependencies for standard CPAN phases (co
  [Removed / runtime requires]
  - Dist::Zilla::Util::ConfigDumper
 
+ [Removed / test requires]
+ - Dist::Zilla::Util::Test::KENTNL 1.003001
+
 0.001002 2014-10-17T08:34:14Z
 
 0.001001 2014-08-29T09:59:08Z

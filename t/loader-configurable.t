@@ -2,9 +2,8 @@
 use strict;
 use warnings;
 
-use Test::More;
-use Test::DZil qw( simple_ini );
-use Dist::Zilla::Util::Test::KENTNL qw( dztest );
+use Test::More tests => 6;
+use Test::DZil qw( simple_ini Builder );
 use Dist::Zilla::Util::ConfigDumper qw( dump_plugin );
 use Test::Differences;
 
@@ -43,14 +42,19 @@ use Test::Differences;
 }
 
 sub getinj {
-  my ($test) = @_;
-  return grep { $_->isa('Dist::Zilla::Plugin::Injected') } @{ $test->builder->plugins };
+  my ($zilla) = @_;
+  return grep { $_->isa('Dist::Zilla::Plugin::Injected') } @{ $zilla->plugins };
 }
+
+sub mkdist {
+  my $tz = Builder->from_config( { dist_root => 'invalid' }, { add_files => {@_} } );
+  $tz->chrome->logger->set_debug(1);
+  return $tz;
+}
+
 subtest 'basic, noargs' => sub {
-  my $test = dztest();
-  $test->add_file(
-    'dist.ini',
-    simple_ini(
+  my $zilla = mkdist(
+    'source/dist.ini' => simple_ini(
       [
         'Example' => {
           dz_plugin => 'Injected'
@@ -58,20 +62,18 @@ subtest 'basic, noargs' => sub {
       ]
     )
   );
-  $test->build_ok;
-  is( scalar getinj($test), 1, "One plugin loads another 1" );
+  $zilla->build;
+  is( scalar getinj($zilla), 1, "One plugin loads another 1" );
   eq_or_diff(
-    [ map { dump_plugin($_)->{config} } getinj($test) ],
+    [ map { dump_plugin($_)->{config} } getinj($zilla) ],
     [ { 'Dist::Zilla::Plugin::Injected' => { payload => {} } } ],
     'Init state ok'
   );
 };
 
 subtest 'basic, named' => sub {
-  my $test = dztest();
-  $test->add_file(
-    'dist.ini',
-    simple_ini(
+  my $zilla = mkdist(
+    'source/dist.ini' => simple_ini(
       [
         'Example' => {
           dz_plugin      => 'Injected',
@@ -80,16 +82,14 @@ subtest 'basic, named' => sub {
       ]
     )
   );
-  $test->build_ok;
-  is( scalar getinj($test), 1, "One plugin loads another 1" );
-  eq_or_diff( [ map { dump_plugin($_)->{name} } getinj($test) ], ['MyName'], 'Init state ok' );
+  $zilla->build;
+  is( scalar getinj($zilla), 1, "One plugin loads another 1" );
+  eq_or_diff( [ map { dump_plugin($_)->{name} } getinj($zilla) ], ['MyName'], 'Init state ok' );
 };
 
 subtest 'basic, minversion' => sub {
-  my $test = dztest();
-  $test->add_file(
-    'dist.ini',
-    simple_ini(
+  my $zilla = mkdist(
+    'source/dist.ini' => simple_ini(
       [
         'Example' => {
           dz_plugin            => 'Injected',
@@ -98,20 +98,17 @@ subtest 'basic, minversion' => sub {
       ]
     )
   );
-  $test->build_ok;
-  is( scalar getinj($test), 1, "One plugin loads another 1" );
-  $test->prereqs_deeply(
-    {
-
-      develop => { requires => { 'Dist::Zilla::Plugin::Injected' => '5' } }
-    },
+  $zilla->build;
+  is( scalar getinj($zilla), 1, "One plugin loads another 1" );
+  is_deeply(
+    $zilla->distmeta->{prereqs},
+    { develop => { requires => { 'Dist::Zilla::Plugin::Injected' => '5' } } },
+    "develop prereqs match expected"
   );
 };
 subtest 'basic, minversion phasechange' => sub {
-  my $test = dztest();
-  $test->add_file(
-    'dist.ini',
-    simple_ini(
+  my $zilla = mkdist(
+    'source/dist.ini' => simple_ini(
       [
         'Example' => {
           dz_plugin            => 'Injected',
@@ -121,20 +118,17 @@ subtest 'basic, minversion phasechange' => sub {
       ]
     )
   );
-  $test->build_ok;
-  is( scalar getinj($test), 1, "One plugin loads another 1" );
-  $test->prereqs_deeply(
-    {
-
-      runtime => { requires => { 'Dist::Zilla::Plugin::Injected' => '5' } }
-    },
+  $zilla->build;
+  is( scalar getinj($zilla), 1, "One plugin loads another 1" );
+  is_deeply(
+    $zilla->distmeta->{prereqs},
+    { runtime => { requires => { 'Dist::Zilla::Plugin::Injected' => '5' } } },
+    "runtime prereqs as expected"
   );
 };
 subtest 'basic, minversion hide' => sub {
-  my $test = dztest();
-  $test->add_file(
-    'dist.ini',
-    simple_ini(
+  my $zilla = mkdist(
+    'source/dist.ini' => simple_ini(
       [
         'Example' => {
           dz_plugin            => 'Injected',
@@ -144,20 +138,14 @@ subtest 'basic, minversion hide' => sub {
       ]
     )
   );
-  $test->build_ok;
-  is( scalar getinj($test), 1, "One plugin loads another 1" );
-  $test->prereqs_deeply(
-    {
-
-    },
-  );
+  $zilla->build;
+  is( scalar getinj($zilla), 1, "One plugin loads another 1" );
+  is_deeply( $zilla->distmeta->{prereqs}, {}, 'Prereqs are empty' );
 };
 
 subtest 'basic, arg passthrough' => sub {
-  my $test = dztest();
-  $test->add_file(
-    'dist.ini',
-    simple_ini(
+  my $zilla = mkdist(
+    'source/dist.ini' => simple_ini(
       [
         'Example' => {
           dz_plugin            => 'Injected',
@@ -167,13 +155,11 @@ subtest 'basic, arg passthrough' => sub {
       ]
     )
   );
-  $test->build_ok;
-  is( scalar getinj($test), 1, "One plugin loads another 1" );
+  $zilla->build;
+  is( scalar getinj($zilla), 1, "One plugin loads another 1" );
   eq_or_diff(
-    [ map { dump_plugin($_)->{config} } getinj($test) ],
+    [ map { dump_plugin($_)->{config} } getinj($zilla) ],
     [ { 'Dist::Zilla::Plugin::Injected' => { payload => { key1 => 'value1', key2 => 'value2' } } } ],
     'Value pass ok'
   );
 };
-
-done_testing;
