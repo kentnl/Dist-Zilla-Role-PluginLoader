@@ -19,6 +19,9 @@ has sequence      => ( is => ro =>, required   => 1 );
 has assembler     => ( is => ro =>, lazy_build => 1 );
 has section_class => ( is => ro =>, lazy_build => 1 );
 
+no Moose;
+__PACKAGE__->meta->make_immutable;
+
 sub _build_assembler {
   my ($self) = @_;
   return $self->sequence->assembler;
@@ -98,8 +101,6 @@ sub load_ini {
   return $self->load( $package, $name, [ map { $self->_split_ini_token($_) } @{$attrs} ] );
 }
 
-no Moose;
-__PACKAGE__->meta->make_immutable;
 
 1;
 
