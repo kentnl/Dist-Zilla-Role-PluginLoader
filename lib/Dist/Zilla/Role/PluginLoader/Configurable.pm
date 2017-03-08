@@ -47,6 +47,8 @@ around mvp_multivalue_args => sub {
   return ( qw( dz_plugin_arguments prereq_to ), @items );
 };
 
+no Moose::Role;
+
 sub load_plugins {
   my ( $self, $loader ) = @_;
   $loader->load_ini( $self->dz_plugin, $self->dz_plugin_name, $self->dz_plugin_arguments );
@@ -75,8 +77,6 @@ sub register_prereqs {
   }
   return;
 }
-
-no Moose::Role;
 
 1;
 

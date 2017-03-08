@@ -1,6 +1,6 @@
 Release history for Dist-Zilla-Role-PluginLoader
 
-0.001003 2017-03-08T08:56:28Z e59b519
+0.001003 2017-03-08T08:58:40Z 83608e0
  - Bugfix: Avoid test failures with -Ddefault_inc_excludes_dot
 
  [Dependencies::Stats]
