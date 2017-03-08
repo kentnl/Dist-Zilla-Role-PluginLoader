@@ -1,11 +1,10 @@
 use 5.008;    # utf8
 use strict;
 use warnings;
-use utf8;
 
 package Dist::Zilla::Role::PluginLoader;
 
-our $VERSION = '0.001002';
+our $VERSION = '0.001003';
 
 # ABSTRACT: A Plugin that can load others.
 
@@ -25,6 +24,16 @@ around plugin_from_config => sub {
   return $own_object;
 };
 
+around dump_config => sub {
+  my ( $orig, $self, @args ) = @_;
+  my $config = $self->$orig(@args);
+  my $localconf = $config->{ +__PACKAGE__ } = {};
+  $localconf->{ q[$] . __PACKAGE__ . '::VERSION' } = $VERSION;
+  $localconf->{ q[$] . q[Dist::Zilla::Util::PluginLoader::VERSION] } = $Dist::Zilla::Util::PluginLoader::VERSION;
+
+  return $config;
+};
+
 no Moose::Role;
 
 1;
@@ -41,7 +50,7 @@ Dist::Zilla::Role::PluginLoader - A Plugin that can load others.
 
 =head1 VERSION
 
-version 0.001002
+version 0.001003
 
 =head1 WARNINGS
 
@@ -143,7 +152,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by Kent Fredric <kentfredric@gmail.com>.
+This software is copyright (c) 2017 by Kent Fredric <kentfredric@gmail.com>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

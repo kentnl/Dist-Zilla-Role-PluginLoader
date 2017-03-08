@@ -1,11 +1,10 @@
 use 5.010;    # _Pulp__5010_qr_m_propagate_properly
 use strict;
 use warnings;
-use utf8;
 
 package Dist::Zilla::Role::PluginLoader::Configurable;
 
-our $VERSION = '0.001002';
+our $VERSION = '0.001003';
 
 # ABSTRACT: A role for plugins that load user defined and configured plugins
 
@@ -13,7 +12,6 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
 use Moose::Role qw( has around with );
 use Dist::Zilla::Util;
-use Dist::Zilla::Util::ConfigDumper qw( config_dumper );
 with 'Dist::Zilla::Role::PrereqSource', 'Dist::Zilla::Role::PluginLoader';
 
 has dz_plugin => ( is => ro =>, required => 1 );
@@ -47,6 +45,20 @@ around mvp_multivalue_args => sub {
   return ( qw( dz_plugin_arguments prereq_to ), @items );
 };
 
+around dump_config => sub {
+  my ( $orig, $self, @args ) = @_;
+  my $config = $self->$orig(@args);
+  my $localconf = $config->{ +__PACKAGE__ } = {};
+
+  $localconf->{dz_plugin} = $self->dz_plugin;
+  for my $attr (qw( dz_plugin_name dz_plugin_minversion dz_plugin_arguments prereq_to )) {
+    $localconf->{attr} = $self->can($attr)->($self) if $self->meta->find_attribute_by_name($attr)->has_value($self);
+  }
+  $localconf->{ q[$] . __PACKAGE__ . '::VERSION' } = $VERSION;
+  return $config;
+};
+no Moose::Role;
+
 sub load_plugins {
   my ( $self, $loader ) = @_;
   $loader->load_ini( $self->dz_plugin, $self->dz_plugin_name, $self->dz_plugin_arguments );
@@ -76,8 +88,6 @@ sub register_prereqs {
   return;
 }
 
-no Moose::Role;
-
 1;
 
 __END__
@@ -92,7 +102,7 @@ Dist::Zilla::Role::PluginLoader::Configurable - A role for plugins that load use
 
 =head1 VERSION
 
-version 0.001002
+version 0.001003
 
 =head1 METHODS
 
@@ -221,7 +231,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by Kent Fredric <kentfredric@gmail.com>.
+This software is copyright (c) 2017 by Kent Fredric <kentfredric@gmail.com>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

@@ -1,11 +1,10 @@
 use 5.008;    # utf8
 use strict;
 use warnings;
-use utf8;
 
 package Dist::Zilla::Util::PluginLoader;
 
-our $VERSION = '0.001002';
+our $VERSION = '0.001003';
 
 # ABSTRACT: Inflate a Legal Dist::Zilla Plugin from basic parts
 
@@ -18,6 +17,9 @@ use Dist::Zilla::Util;
 has sequence      => ( is => ro =>, required   => 1 );
 has assembler     => ( is => ro =>, lazy_build => 1 );
 has section_class => ( is => ro =>, lazy_build => 1 );
+
+no Moose;
+__PACKAGE__->meta->make_immutable;
 
 sub _build_assembler {
   my ($self) = @_;
@@ -98,8 +100,6 @@ sub load_ini {
   return $self->load( $package, $name, [ map { $self->_split_ini_token($_) } @{$attrs} ] );
 }
 
-no Moose;
-__PACKAGE__->meta->make_immutable;
 
 1;
 
@@ -115,7 +115,7 @@ Dist::Zilla::Util::PluginLoader - Inflate a Legal Dist::Zilla Plugin from basic 
 
 =head1 VERSION
 
-version 0.001002
+version 0.001003
 
 =head1 SYNOPSIS
 
@@ -198,7 +198,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by Kent Fredric <kentfredric@gmail.com>.
+This software is copyright (c) 2017 by Kent Fredric <kentfredric@gmail.com>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
