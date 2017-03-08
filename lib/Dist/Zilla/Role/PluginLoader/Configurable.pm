@@ -4,7 +4,7 @@ use warnings;
 
 package Dist::Zilla::Role::PluginLoader::Configurable;
 
-our $VERSION = '0.001003';
+our $VERSION = '0.001004';
 
 # ABSTRACT: A role for plugins that load user defined and configured plugins
 
@@ -102,7 +102,7 @@ Dist::Zilla::Role::PluginLoader::Configurable - A role for plugins that load use
 
 =head1 VERSION
 
-version 0.001003
+version 0.001004
 
 =head1 METHODS
 

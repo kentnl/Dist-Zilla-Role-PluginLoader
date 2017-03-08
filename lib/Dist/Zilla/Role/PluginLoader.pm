@@ -4,7 +4,7 @@ use warnings;
 
 package Dist::Zilla::Role::PluginLoader;
 
-our $VERSION = '0.001003';
+our $VERSION = '0.001004';
 
 # ABSTRACT: A Plugin that can load others.
 
@@ -50,7 +50,7 @@ Dist::Zilla::Role::PluginLoader - A Plugin that can load others.
 
 =head1 VERSION
 
-version 0.001003
+version 0.001004
 
 =head1 WARNINGS
 

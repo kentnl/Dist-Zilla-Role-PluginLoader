@@ -4,7 +4,7 @@ use warnings;
 
 package Dist::Zilla::Util::PluginLoader;
 
-our $VERSION = '0.001003';
+our $VERSION = '0.001004';
 
 # ABSTRACT: Inflate a Legal Dist::Zilla Plugin from basic parts
 
@@ -115,7 +115,7 @@ Dist::Zilla::Util::PluginLoader - Inflate a Legal Dist::Zilla Plugin from basic 
 
 =head1 VERSION
 
-version 0.001003
+version 0.001004
 
 =head1 SYNOPSIS
 
