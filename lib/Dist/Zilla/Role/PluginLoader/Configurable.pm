@@ -13,7 +13,6 @@ our $VERSION = '0.001003';
 
 use Moose::Role qw( has around with );
 use Dist::Zilla::Util;
-use Dist::Zilla::Util::ConfigDumper qw( config_dumper );
 with 'Dist::Zilla::Role::PrereqSource', 'Dist::Zilla::Role::PluginLoader';
 
 has dz_plugin => ( is => ro =>, required => 1 );
